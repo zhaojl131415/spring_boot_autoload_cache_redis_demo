@@ -46,6 +46,7 @@ public class UserController {
         UserDO user = new UserDO();
         user.setId(id);
         user.setName("name:" + id);
+        user.setStatus(1);
         userService.updateUser(user);
     }
 

@@ -14,11 +14,11 @@ import java.util.List;
  * @author jiayu.qiu
  */
 public interface UserMapper{
-    String CACHE_NAME = "user2";
-    
-    default String getCacheName() {
-        return CACHE_NAME;
-    }
+//    String CACHE_NAME = "user2";
+//
+//    default String getCacheName() {
+//        return CACHE_NAME;
+//    }
 
 
     @Cache(expire = 3600, expireExpression = "null == #retVal ? 600: 3600", key = "#target.getCacheName() +'-byid-' + #args[0]")
@@ -55,7 +55,7 @@ public interface UserMapper{
      * @param name
      * @return
      */
-    @Cache(expire = 1200, expireExpression = "null == #retVal ? 120: 1200", key = "'userid-byname-' + #args[0]")
+    @Cache(expire = 1200, expireExpression = "null == #retVal ? 120: 1200", key = "'user-byname-' + #args[0]")
     Long getUserIdByName(String name);
 
     /**
@@ -71,7 +71,7 @@ public interface UserMapper{
      * 
      * @param user
      */
-    @CacheDelete({ @CacheDeleteKey(value = "'userid-byname-' + #args[0].name") })
+    @CacheDelete({ @CacheDeleteKey(value = "'user-byname-' + #args[0].name") })
     int addUser(UserDO user);
 
     /**
