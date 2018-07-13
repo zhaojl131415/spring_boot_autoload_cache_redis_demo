@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
 //    @Cache(expire = 3600, key = "user-all", autoload = true)
-    @Cache(expire = 3600, key = "user-all")
+    @Cache(expire = 3600, key = "user-all", autoload = true)
     public List<UserDO> list() {
         return userMapper.allUsers();
     }

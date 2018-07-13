@@ -30,7 +30,7 @@ public interface UserMapper{
      * @param id
      * @return
      */
-    @Cache(expire = 3600, expireExpression = "null == #retVal ? 600: 3600", key = "'user-byid-' + #args[0]")
+    @Cache(expire = 3600, expireExpression = "null == #retVal ? 600: 3600", key = "'user-byid-' + #args[0]", autoload = true)
     UserDO getUserById(Long id);
     
     /**
@@ -80,7 +80,10 @@ public interface UserMapper{
      * @param user
      * @return
      */
-    @CacheDelete({ @CacheDeleteKey(value = "'user-byid-' + #args[0].id", condition = "#retVal > 0") })
+    @CacheDelete({
+            @CacheDeleteKey(value = "'user-byid-' + #args[0].id", condition = "#retVal > 0"),
+            @CacheDeleteKey(value = "user-all", condition = "#retVal > 0")
+    })
     int updateUser(UserDO user);
 
     /**
